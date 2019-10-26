@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  app:
+    user: $UID:$GID
+    build:
+      #search for the dockerfile in the current directory
+      context: .
+      #expose port 8000 of container to port 8000 of local
+    ports:
+      - "8000:8000"
+    volumes:
+      #mount all the code in app directory in local to app directory of conatiner
+      - ./app/:/app
+    command: > #start the django server
+      sh -c "python manage.py runserver 0.0.0.0:8000"
